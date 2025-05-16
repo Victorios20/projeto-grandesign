@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { PageLayout } from "@/components/ui/grandesgn/page-layout";
+import { PageLayout } from "@/components/grandesgn/page-layout";
 import { homeItems, homeLinks } from "./home-data";
 
 export default function HomePage() {

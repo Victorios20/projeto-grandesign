@@ -34,7 +34,7 @@ export function PageLayout({ children, links }: PropsWithChildren<{ links?: NavL
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header com breadcrumb do shadcn */}
-        <header className="sticky top-0 z-30 flex h-16 items-center px-6 bg-white border-b border-primary justify-between">
+        <header className="top-0 z-30 flex h-16 items-center px-6 justify-between">
           <Breadcrumb className="flex-1">
             {links &&
               links.map((link, idx) => {
