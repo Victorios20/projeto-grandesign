@@ -13,14 +13,13 @@ export type DadosPessoais = {
   email?: string
 }
 
-
-
 type DadosServico = {
   tipoTelhado: string
   tamanhoMadeira: string
   tipoMadeira: string
   corMadeira: string
   quantidadeMetros: number
+  dataEntrega?: string  // Propriedade adicionada
 }
 
 export function useOrcamento() {
@@ -51,6 +50,7 @@ export function useOrcamento() {
       tipoMadeira: "",
       corMadeira: "",
       quantidadeMetros: 0,
+      dataEntrega: "",  // Inicializa também
     }
 
     const dados = localStorage.getItem("dadosServico")
@@ -60,6 +60,7 @@ export function useOrcamento() {
       tipoMadeira: "",
       corMadeira: "",
       quantidadeMetros: 0,
+      dataEntrega: "",  // Inicializa também
     }
   }
 
@@ -91,6 +92,7 @@ export function useOrcamento() {
       tipoMadeira: "",
       corMadeira: "",
       quantidadeMetros: 0,
+      dataEntrega: "",  // Reset também aqui
     }
     setDadosPessoais(dadosPessoaisIniciais)
     setDadosServico(dadosServicoIniciais)
