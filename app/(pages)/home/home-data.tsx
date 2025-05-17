@@ -10,7 +10,7 @@ export const homeLinks = [
 export const homeItems = [
   {
     icon: FileText,
-    title: "dados pessoais",
+    title: "Gerar Orçamento",
     href: "/home/gerar-orcamento/dados-pessoais",
   },
 ];

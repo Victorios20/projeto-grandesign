@@ -36,10 +36,11 @@ export default function DadosPessoaisPage() {
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setDadosPessoais(formValues)
-        router.push("/gerar-orcamento/dados-servico")
-    }
+    e.preventDefault()
+    setDadosPessoais(formValues)
+    router.push("/home/gerar-orcamento/dados-servico")
+}
+
 
     const handleClearForm = () => {
         const dadosLimpos = {
@@ -60,7 +61,7 @@ export default function DadosPessoaisPage() {
 
     const links = [
         { label: "Home", href: "/home" },
-        { label: "Dados Pessoais", href: "/gerar-orcamento/dados-pessoais" },
+        { label: "Dados Pessoais", href: "/dados-pessoais" },
     ]
 
     return (

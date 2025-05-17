@@ -16,7 +16,12 @@ type NavLink = {
   label: string;
 };
 
-export function PageLayout({ children, links }: PropsWithChildren<{ links?: NavLink[] }>) {
+type PageLayoutProps = PropsWithChildren<{
+  links?: NavLink[];
+  backgroundImage?: boolean; // prop opcional para controlar a imagem de fundo
+}>;
+
+export function PageLayout({ children, links, backgroundImage }: PageLayoutProps) {
   return (
     <div className="flex h-full w-full bg-secondary text-gray-700">
       {/* Sidebar branca com borda lateral direita */}
@@ -30,11 +35,23 @@ export function PageLayout({ children, links }: PropsWithChildren<{ links?: NavL
         </Link>
       </aside>
 
-
       {/* Conteúdo principal */}
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Header com breadcrumb do shadcn */}
-        <header className="top-0 z-30 flex h-16 items-center px-6 justify-between">
+      <div className="flex-1 flex flex-col min-h-screen relative">
+        {/* Imagem centralizada no fundo, controlada pelo prop backgroundImage */}
+        {backgroundImage && (
+          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+            <Image
+              src="/logoCinza.png"
+              alt="Logo centralizada"
+              width={400}
+              height={400}
+              className="opacity-10"
+            />
+          </div>
+        )}
+
+        {/* Header com breadcrumb */}
+        <header className="top-0 z-20 flex h-16 items-center px-6 justify-between">
           <Breadcrumb className="flex-1">
             {links &&
               links.map((link, idx) => {
@@ -58,8 +75,8 @@ export function PageLayout({ children, links }: PropsWithChildren<{ links?: NavL
               })}
           </Breadcrumb>
 
-          {/* Imagem logo no canto direito */}
-          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+          {/* Imagem do logo no canto direito */}
+          <div className="relative w-10 h-10 rounded-full overflow-hidden z-20">
             <Image
               src="/logo.jpg"
               alt="Logo"
@@ -69,7 +86,9 @@ export function PageLayout({ children, links }: PropsWithChildren<{ links?: NavL
             />
           </div>
         </header>
-        <main className="flex-1 p-6">{children}</main>
+
+        {/* Conteúdo sobre a imagem */}
+        <main className="flex-1 p-6 relative z-10">{children}</main>
       </div>
     </div>
   );
