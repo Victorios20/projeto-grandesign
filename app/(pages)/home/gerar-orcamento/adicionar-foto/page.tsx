@@ -7,17 +7,18 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Textarea } from "@/components/ui/textarea"
 import { Trash } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useOrcamento } from "@/context/orcamento-context"
+import { gerarPdf } from "./pdfGenerator"
+import { useRouter } from "next/navigation"
 
 export default function DescricaoServicoPage() {
-  const router = useRouter()
-  const { dadosDescricao, setDadosDescricao } = useOrcamento()
+  const { dadosPessoais, dadosServico, dadosDescricao, setDadosDescricao } = useOrcamento()
+    const router = useRouter()
 
   const [formValues, setFormValues] = useState({
     descricao: dadosDescricao?.descricao || "",
-    foto: dadosDescricao?.foto || null, // base64 ou File
+    foto: dadosDescricao?.foto || null,
   })
 
   const [preview, setPreview] = useState<string | null>(
@@ -45,10 +46,16 @@ export default function DescricaoServicoPage() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setDadosDescricao(formValues)
-    router.push("/resumo")
+
+    try {
+      await gerarPdf(dadosPessoais, dadosServico, formValues)
+    } catch (err) {
+      console.error("Erro ao gerar PDF:", err)
+      alert("Erro ao gerar o orçamento. Tente novamente.")
+    }
   }
 
   const handleClear = () => {

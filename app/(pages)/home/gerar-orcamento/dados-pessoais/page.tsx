@@ -93,16 +93,16 @@ export default function DadosPessoaisPage() {
                         { id: "cidade", label: "Cidade", placeholder: "Ex: Fortaleza" },
                         { id: "telefone", label: "Telefone", placeholder: "(xx) xxxxx-xxxx" },
                         { id: "cpf", label: "CPF", placeholder: "000.000.000-00" },
-                        { id: "email", label: "Email", placeholder: "exemplo@email.com" }, // <-- input de email
+                        { id: "email", label: "Email", placeholder: "exemplo@email.com" },
                     ].map(({ id, label, placeholder }) => (
                         <div key={id} className="flex flex-col">
                             <Label htmlFor={id} className="mb-2">{label}</Label>
                             <Input
-                                type={id === "email" ? "email" : "text"} // tipo email para o campo email
+                                type={id === "email" ? "email" : "text"}
                                 name={id}
                                 id={id}
                                 placeholder={placeholder}
-                                required
+                                required={id === "nome" || id === "telefone"}
                                 value={formValues[id as keyof typeof formValues]}
                                 onChange={handleChange}
                             />
